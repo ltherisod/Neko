@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <NavbarComponent/> -->
+    <RegisterUser/>
+    <LogIn/>
+    <ItemListContainer/>
+    <ItemDetailContainer/>
+    <CartView/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// import NavbarComponent from './components/NavbarComponent.vue'
+import ItemListContainer from './containers/ItemListContainer.vue'
+import ItemDetailContainer from './containers/ItemDetailContainer.vue'
+import LogIn from './components/LogIn.vue'
+import RegisterUser from './components/RegisterUser.vue'
+import CartView from './components/CartView.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // NavbarComponent,
+    ItemListContainer,
+    ItemDetailContainer,
+    LogIn,
+    RegisterUser,
+    CartView
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+ 
+ 
 }
 </style>
