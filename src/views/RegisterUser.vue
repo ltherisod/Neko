@@ -139,6 +139,13 @@ export default {
         );
         localStorage.setItem("skywalker", JSON.stringify(res.data));
         Object.assign(this.$data, this.$options.data());
+        this.$swal({
+          position: "top-end",
+          icon: "success",
+          title: `Welcome to Neko ${res.data.name}!`,
+          showConfirmButton: false,
+          timer: 1000,
+        });
         this.$router.push("/home");
       } else {
         if (!this.name) {
