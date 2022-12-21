@@ -5,7 +5,7 @@
   <span class="btn btn-light">{{number}}</span>
   <button class="btn btn-dark" @click="increse" v-bind:disabled='number === stock'>+</button>
   </div>
-  <button class="btn add-button  " @click="addToCart">Shop Now!</button>
+  <button class="btn add-button" v-bind:disabled='number === 0' @click="addToCart">Shop Now!</button>
  </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
             return this.number= this.number - 1 
         },
         addToCart(){
-            alert(`You just added ${this.number} items of `)
+            alert(`You just added ${this.number} items `)
         }
     }
 }

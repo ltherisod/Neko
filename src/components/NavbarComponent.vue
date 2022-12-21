@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+           <router-link class="nav-link active" to="/home">Home</router-link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Shop</a>
+         <li class="nav-item" v-if="isAdmin">
+           <router-link class="nav-link active" to="/config">Config</router-link>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,10 +39,25 @@ export default{
     name:'NavbarComponent',
     components: {
     CartWidget
-  }
+  },
+   data(){
+    return{
+      isAdmin:false,
+    }
+  },
+  created(){
+        if(localStorage.getItem('skywalker')){
+        let user = JSON.parse(localStorage.getItem('skywalker'))
+         this.isAdmin=user.admin
+          console.log(this.isAdmin)
+        }
+  },
 }
 </script>
 <style scoped>
+nav a.router-link-exact-active {
+  color: #ff0101 !important;
+}
 img{
     width:10rem;
 

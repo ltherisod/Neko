@@ -6,25 +6,25 @@
 
 <script>
 import ItemDetail from '../components/ItemDetail.vue'
+import axios from 'axios'
 export default {
   name: 'ItemDetailContainer',
   components:{
     ItemDetail
   },
+  props:{
+    id:String
+  },
    data(){
     return{
-         item:{
-         id:'022',
-         img:'https://i.postimg.cc/mkfgGPzW/naruto.png',
-         category:'rolls',
-         name:'Konoha Roll',
-         ingredients:'terikaki salmon, avocado, garlic crispy, cucumber',
-         price:55,
-         stock:45,
-        },
-        
+         item:{}
     }
-  }
+  },
+  created(){
+        axios.get(`https://639f2d1e5eb8889197f64888.mockapi.io/products/${this.id}`)
+            .then(data => this.item = data.data)
+            .catch((error)=> console.log(error))
+    }
  
 }
 </script>

@@ -5,7 +5,7 @@
     <h5 class="card-title">{{prod.name}}</h5>
     <p class="card-text">$ {{prod.price}}</p>
   </div>
-    <a href="#" class="btn btn-dark">Check it out!</a>
+    <button  @click="goThere({path:`/detail/${prod.id}`})" class="btn btn-dark">Check it out!</button>
 </div>
 </template>
 
@@ -14,7 +14,12 @@ export default {
   name: 'ItemComponent',
     props:{
         prod:Object
-    }
+    },
+    methods: {
+        goThere(url){
+            this.$router.push(url);
+        }
+    },
 }
 </script>
 
