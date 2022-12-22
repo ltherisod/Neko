@@ -15,14 +15,14 @@
     </thead>
     <tbody>
     <tr v-for="prod in items" :key="prod.id">
-     <td>{{prod.id}}</td>
-    <td><img :src="prod.img" :alt="prod.name" class='img'></td>
-    <td>{{prod.name}}</td>
-    <td>{{prod.ingredients}}</td>
-     <td>{{prod.stock}}</td>
-    <td>$ {{prod.price}}</td>
-    <td><button class="btn btn-danger" @click="showAlert(prod.id)">X</button></td>
-    </tr>
+        <td>{{prod.id}}</td>
+        <td><img :src="prod.img" :alt="prod.name" class='img'></td>
+        <td>{{prod.name}}</td>
+        <td>{{prod.ingredients}}</td>
+        <td>{{prod.stock}}</td>
+        <td>$ {{prod.price}}</td>
+        <td><button class="btn btn-danger" @click="showAlert(prod.id)">X</button></td>
+        </tr>
     </tbody>
   </table>
      </div>
