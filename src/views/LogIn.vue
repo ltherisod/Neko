@@ -25,31 +25,29 @@
 </template>
 
 <script>
-import axios from "axios";
+import {mapActions, mapGetters, mapMutations} from 'vuex'
 export default {
   name: "LogIn",
   data() {
     return {
       email: "",
       password: "",
-      users: [],
       error: false,
       invalid: false,
     };
   },
   created() {
-    axios
-      .get("https://639f2d1e5eb8889197f64888.mockapi.io/users")
-      .then((data) => (this.users = data.data))
-      .catch((error) => console.log(error));
+    this.getUsers()
   },
   methods: {
+     ...mapActions('usersModule',['getUsers']),
+      ...mapMutations('usersModule', ['logUser']),
     onSubmit(event) {
       event.preventDefault();
       if (this.email.length && this.password.length) {
-        const user = this.users.find((data) => data.email === this.email);
+        const user = this.getUsersData.find((data) => data.email === this.email);
         if (user.email === this.email && user.password === this.password) {
-          localStorage.setItem("skywalker", JSON.stringify(user));
+         this.logUser(user)
           this.$swal({
             position: "top-end",
             icon: "success",
@@ -73,6 +71,7 @@ export default {
     },
   },
   computed: {
+     ...mapGetters('usersModule',['getUsersData']),
     validation() {
       return this.user.length && this.password.length;
     },

@@ -1,8 +1,9 @@
 <template lang="">
-  <div> <div v-if='token'> <NavbarComponent /> </div> <router-view /> </div>
+  <div> <div v-if='getUser'> <NavbarComponent /> </div> <router-view /> </div>
 </template>
 <script>
 import NavbarComponent from "@/components/NavbarComponent.vue";
+import { mapGetters} from 'vuex'
 export default {
   name: "RouterComponent",
   components: {
@@ -10,23 +11,17 @@ export default {
   },
   data() {
     return {
-      token: "",
+     
     };
   },
   created() {
-    if (localStorage.getItem("skywalker")) {
-      let user = JSON.parse(localStorage.getItem("skywalker"));
-      this.token = user.id;
-      console.log(this.token);
-    }
+    this.getUser
   },
-  beforeUpdate() {
-    console.log("Before update!");
-    if (localStorage.getItem("skywalker")) {
-      let user = JSON.parse(localStorage.getItem("skywalker"));
-      this.token = user.id;
-    }
-  },
+  computed:{
+     ...mapGetters('usersModule',['getUser']),
+  }
+ 
+
 };
 </script>
 <style lang=""></style>

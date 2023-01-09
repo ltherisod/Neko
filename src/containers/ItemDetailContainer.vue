@@ -1,30 +1,36 @@
 <template>
- <div class="item-container">
-    <ItemDetail :item="item"/>
+<div>
+ <div class='catneo-container' v-if='isLoading'>
+ <LoadingCat/>
  </div>
+ <div v-else class="item-container">
+    <ItemDetail :item="product"/>
+ </div>
+</div>
 </template>
 
 <script>
 import ItemDetail from '../components/ItemDetail.vue'
-import axios from 'axios'
+import LoadingCat from '../components/LoadingCat.vue'
+import { mapGetters, mapActions} from 'vuex'
 export default {
   name: 'ItemDetailContainer',
   components:{
-    ItemDetail
+    ItemDetail,
+    LoadingCat
   },
   props:{
     id:String
   },
-   data(){
-    return{
-         item:{}
-    }
-  },
   created(){
-        axios.get(`https://639f2d1e5eb8889197f64888.mockapi.io/products/${this.id}`)
-            .then(data => this.item = data.data)
-            .catch((error)=> console.log(error))
-    }
+    this.getOneProduct(this.id)
+  },
+  methods:{
+     ...mapActions('itemsModule',['getOneProduct']),
+  },
+  computed:{
+     ...mapGetters('itemsModule',['product', 'isLoading']),
+  }
  
 }
 </script>
@@ -36,6 +42,11 @@ export default {
         min-height:80vh;
         background-image:url("https://i.postimg.cc/zGj1YBy0/fonde-Detail.png");
         background-size:cover;
+    }
+    .catneo-container{
+        width:100%;
+        min-height:80vh;
+        background-color:black;
     }
 </style>
 

@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import usersModule from '@/modules/users'
+import itemsModule from '@/modules/items'
+import ordersModule from '@/modules/orders'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    cart:[]
+    cart:[],
   },
   getters: {
    
@@ -43,5 +45,8 @@ export default new Vuex.Store({
     }
   },
   modules: {
+    usersModule,
+    itemsModule,
+    ordersModule
   }
 })

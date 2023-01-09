@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <router-link class="navbar-brand"  to="/home">
         <img src="../assets/logo.png" alt="logo" />
-      </a>
+      </router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -52,7 +52,7 @@
             >
               <div
                 class="user-profile"
-                v-bind:style="{ 'background-image': 'url(' + logged.img + ')' }"
+                v-bind:style="{ 'background-image': 'url(' + getUser.img + ')' }"
               ></div>
             </a>
             <ul class="dropdown-menu">
@@ -68,6 +68,7 @@
 
 <script>
 import CartWidget from "./widgets/CartWidget.vue";
+import { mapGetters, mapMutations} from 'vuex'
 export default {
   name: "NavbarComponent",
   components: {
@@ -76,23 +77,24 @@ export default {
   data() {
     return {
       isAdmin: false,
-      logged: "",
     };
   },
   created() {
-    if (localStorage.getItem("skywalker")) {
-      let user = JSON.parse(localStorage.getItem("skywalker"));
-      this.isAdmin = user.admin;
-      this.logged = user;
-      console.log(this.isAdmin);
+    console.log(this.getUser);
+    if (this.getUser.admin === 'true') {
+      this.isAdmin=true
     }
   },
   methods: {
+      ...mapMutations('usersModule',['logOutUser']),
     logOut() {
-      localStorage.clear();
+      this.logOutUser()
       this.$router.push("/");
     },
   },
+  computed:{
+      ...mapGetters('usersModule',['getUser']),
+  }
 };
 </script>
 <style scoped>

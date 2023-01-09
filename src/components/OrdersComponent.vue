@@ -13,7 +13,7 @@
             </tr>
         </thead>
     <tbody>
-    <tr v-for="prod in items" :key="prod.id">
+    <tr v-for="prod in allOrders" :key="prod.id">
         <td>{{prod.id}}</td>
         <td>{{prod.date}}</td>
         <td>{{prod.user?.name}}</td>
@@ -31,32 +31,25 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
+import {mapActions, mapGetters} from 'vuex'
 export default {
   name: 'OrdersComponent',
-  data(){
-    return{
-        items:''
-    }
-  },
  created() {
-    axios
-      .get("https://639f2d1e5eb8889197f64888.mockapi.io/orders")
-      .then((data) => (this.items = data.data))
-      .catch((error) => console.log(error));
+    this.getOrders()
   },
   methods:{
+    ...mapActions('ordersModule',['getOrders', 'changeState']),
      async changeState(item) {
              const product={
                     ...item,
                     state:true
               }
-            const res = await axios.put(`https://639f2d1e5eb8889197f64888.mockapi.io/orders/${product.id}`,{...product})
+            this.changeState(product)
            
              this.$swal({
                 position: 'top-end',
                 icon: 'success',
-                title: `Order :${res.data.id} was updated!`,
+                title: `Order :${this.oneOrder.id} was updated!`,
                 showConfirmButton: false,
                 timer: 1000
                 })
@@ -65,7 +58,10 @@ export default {
         }
       
       
-    }
+    },
+     computed:{
+     ...mapGetters('ordersModule',['allOrders', 'loading', 'oneOrder']),
+  }
 };
 
 </script>

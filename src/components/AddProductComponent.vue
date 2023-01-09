@@ -43,7 +43,7 @@
           </div>
 </template>
 <script>
-import axios from 'axios'
+import { mapActions} from 'vuex'
 export default {
     name:"AddProductComponent",
      data() {
@@ -71,6 +71,7 @@ export default {
       }
     },
      methods: {
+       ...mapActions('itemsModule',['postProduct']),
       async onSubmit(event) {
         event.preventDefault()
         if(this.name.length > 6 &&
@@ -87,17 +88,15 @@ export default {
                     img:this.img, 
                     price:this.price
               }
-        const res = await axios.post('https://639f2d1e5eb8889197f64888.mockapi.io/products',{
-          ...product
-        })
+            this.postProduct(product)
             this.$swal({
                 position: 'top-end',
                 icon: 'success',
-                title: `${res.data.name} was added!`,
+                title: `${product.name} was added!`,
                 showConfirmButton: false,
                 timer: 1000
                 })
-            console.log(res.data)
+            
             Object.assign(this.$data, this.$options.data());
         }else{
             console.log('nope')

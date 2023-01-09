@@ -47,7 +47,7 @@
           </div>
 </template>
 <script>
-import axios from 'axios'
+import {mapActions} from 'vuex'
 export default {
     name:"AddProductComponent",
      data() {
@@ -77,6 +77,7 @@ export default {
       }
     },
      methods: {
+      ...mapActions('itemsModule',['editProduct']),
       async onSubmit(event) {
         event.preventDefault()
         if(this.name.length > 6 &&
@@ -94,12 +95,11 @@ export default {
                     img:this.img, 
                     price:this.price
               }
-        const res = await axios.put(`https://639f2d1e5eb8889197f64888.mockapi.io/products/${product.id}`,{...product})
-            console.log(res.data)
+              this.editProduct(product)
              this.$swal({
                 position: 'top-end',
                 icon: 'success',
-                title: `${res.data.name} was updated!`,
+                title: `${product.name} was updated!`,
                 showConfirmButton: false,
                 timer: 1000
                 })

@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-    <tr v-for="prod in items" :key="prod.id">
+    <tr v-for="prod in products" :key="prod.id">
         <td>{{prod.id}}</td>
         <td><img :src="prod.img" :alt="prod.name" class='img'></td>
         <td>{{prod.name}}</td>
@@ -28,19 +28,15 @@
      </div>
 </template>
 <script>
-import axios from 'axios'
+import { mapGetters, mapActions} from 'vuex'
 export default {
     name:'ProductTable',
-     data(){
-    return{
-         items:[]
-    }
-  },
+     
   created(){
-        axios.get('https://639f2d1e5eb8889197f64888.mockapi.io/products')
-            .then(data => this.items = data.data)
+       this.getProducts()
     },
     methods:{
+       ...mapActions('itemsModule',['getProducts', 'deleteOneProduct']),
         showAlert(id) {
       // Use sweetalert2
       this.$swal({title: 'Are you sure?',
@@ -51,7 +47,7 @@ export default {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'}).then((result) => {
         if (result.isConfirmed) {
-            axios.delete(`https://639f2d1e5eb8889197f64888.mockapi.io/products/${id}`)
+           this.deleteOneProduct(id)
         this.$swal(
             'Deleted!',
             'Your file has been deleted.',
@@ -60,7 +56,10 @@ export default {
         }
 })
     },
-    }
+    },
+    computed:{
+     ...mapGetters('itemsModule',['products', 'isLoading']),
+  }
 }
 </script>
 <style scoped>

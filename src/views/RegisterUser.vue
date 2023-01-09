@@ -73,7 +73,7 @@
               id="checkbox-1"
               v-model="admin"
               name="checkbox-1"
-              value="true"
+              value='true'
               unchecked-value="false"
             >
             </b-form-checkbox>
@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import {mapActions, mapMutations} from 'vuex'
 export default {
   name: "RegisterUser",
   data() {
@@ -116,11 +116,13 @@ export default {
     };
   },
   methods: {
+    ...mapActions('usersModule',['postUsers']),
+    ...mapMutations('usersModule', ['logUser']),
     async onSubmit(event) {
       event.preventDefault();
       if (
         this.name.length > 6 &&
-        this.email.includes("@") &&
+        this.email.length &&
         this.password.length > 8 &&
         this.password === this.secondpassword
       ) {
@@ -131,18 +133,13 @@ export default {
           password: this.password,
           admin: this.admin,
         };
-        const res = await axios.post(
-          "https://639f2d1e5eb8889197f64888.mockapi.io/users",
-          {
-            ...user,
-          }
-        );
-        localStorage.setItem("skywalker", JSON.stringify(res.data));
+        this.postUsers(user)
+        this.logUser(user)
         Object.assign(this.$data, this.$options.data());
         this.$swal({
           position: "top-end",
           icon: "success",
-          title: `Welcome to Neko ${res.data.name}!`,
+          title: `Welcome to Neko ${user.name}!`,
           showConfirmButton: false,
           timer: 1000,
         });
