@@ -26,6 +26,9 @@ export default{
         },
         setOrder(state, data){
             state.order = data
+        },
+        updateOrders(state, data){
+            state.orders.push(data)
         }
     },
     actions:{
@@ -42,12 +45,27 @@ export default{
             }
             
         },
-        changeState: async function({commit}, product){
+        updateState: async function({commit}, product){
             try{
                 commit('setLoading', true)
                 const res = await axios.put(`https://639f2d1e5eb8889197f64888.mockapi.io/orders/${product.id}`,{...product})
                 const result = res.data
                 commit('setOrder', result)
+                return result
+            }catch(error){
+                console.log(error)
+            }finally{
+                commit('setLoading', false)
+            }
+        },
+        postOrder: async function ({commit}, order){
+            try{
+                commit('setLoading', true)
+                const res = await axios.post("https://639f2d1e5eb8889197f64888.mockapi.io/orders", {
+                ...order});
+                const result = res.data
+                commit('updateOrders', result)
+               return result
             }catch(error){
                 console.log(error)
             }finally{

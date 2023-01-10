@@ -84,11 +84,14 @@ export default{
           },
           deleteOneProduct:async function ({commit}, id){
             try{
+                commit('setIsLoading', true)
                 const res = await   axios.delete(`https://639f2d1e5eb8889197f64888.mockapi.io/products/${id}`)
                 const result = res.data
                 commit('setProduct', result)
             }catch(error){
                 console.log(error)
+            }finally{
+                commit('setIsLoading', false)
             }
           }
     }

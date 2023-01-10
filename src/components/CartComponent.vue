@@ -29,12 +29,9 @@
 </template>
 
 <script>
-import axios from "axios";
+import {mapActions, mapGetters} from 'vuex';
 export default {
   name: "CartComponent",
-  data() {
-    return {};
-  },
   methods: {
     clear() {
       this.$store.dispatch("clear");
@@ -42,29 +39,32 @@ export default {
     deleteItem(i) {
       this.$store.dispatch("removeOneItem", i);
     },
+     ...mapActions('ordersModule',['postOrder']),
     async purchase() {
-      let user = JSON.parse(localStorage.getItem("skywalker"));
-      const order = {
-        user,
+     
+      let order = {
+        user:this.getUser.name,
         cart: this.$store.state.cart,
         date: new Date(),
         status: false,
       };
-      const res = await axios.post("https://639f2d1e5eb8889197f64888.mockapi.io/orders", {
-        ...order,
-      });
+      const res = await this.postOrder(order)
+      
       this.$swal({
         position: "top-end",
         icon: "success",
-        title: `${res.data.user?.name} your order was generated!`,
+        title: `${this.getUser.name} your order was generated!`,
         showConfirmButton: false,
         timer: 1000,
       });
-      console.log(res.data);
       this.clear();
-      this.$router.push(`/checkout/${res.data.id}`);
+      this.$router.push(`/checkout/${res.id}`);
     },
   },
+  computed:{
+     ...mapGetters('usersModule',['getUser']),
+     ...mapGetters('ordersModule',['oneOrder']),
+  }
 };
 </script>
 

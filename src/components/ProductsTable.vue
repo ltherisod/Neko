@@ -1,5 +1,11 @@
 <template lang="">
-     <div class="m-5 d-flex flex-column align-items-center">
+    <div>
+    <div v-if='isLoading' class="m-5 d-flex justify-content-center align-items-center w-100 customdiv">
+      <div class="custom spinner-grow" role="status" >
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+     <div v-else class="m-5 d-flex flex-column align-items-center">
      <h5 class="text-align-center">Our Product List 🍣</h5>
      <table class="table">
     <thead>
@@ -26,6 +32,7 @@
     </tbody>
   </table>
      </div>
+    </div>
 </template>
 <script>
 import { mapGetters, mapActions} from 'vuex'
@@ -65,5 +72,13 @@ export default {
 <style scoped>
     .img{
     width:8rem;
+  }
+  .custom{
+    width:5rem;
+    height:5rem;
+    color: #ff0101 !important;
+  }
+  .customdiv{
+    min-height: 50vh;
   }
 </style>
