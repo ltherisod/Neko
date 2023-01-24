@@ -48,6 +48,7 @@ export default {
     },
     deleteItem(i) {
       this.$store.dispatch("removeOneItem", i);
+      this.$store.dispatch("quantity")
     },
      getTotalPayment(cart) {
         let total = 0
