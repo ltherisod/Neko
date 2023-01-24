@@ -1,64 +1,69 @@
 <template lang="">
+      <div class='add'>
+          <h5>Do you want tu update {{item.name}}? 🍜</h5>
           <div class='container'>
-          <h5>Do you want tu update a product? 🍜</h5>
-          <b-form  @submit="onSubmit"  >
-          <div class='my-4'>
-                <b-form-input v-model="id"  id="name" type="text" placeholder="Please complete with the id of the product you want to edit"></b-form-input>
-                <small class="text-danger position-absolute" v-if="error.id.length !== 0" >{{error.id}}</small>
-            </div>
+            <b-form  @submit="onSubmit"  >
             <div class='my-4'>
-                <b-form-input v-model="name"  id="name" type="text" placeholder="Complete product name"></b-form-input>
-                <small class="text-danger position-absolute" v-if="error.name.length !== 0" >{{error.name}}</small>
-            </div>
-            <div class='my-4'>
-              <b-form-input v-model="ingredients"  id="ingredients" type="text" placeholder="Ingredients..."></b-form-input>
-              <small class="text-danger position-absolute" v-if="error.ingredients.length !== 0" >{{error.ingredients}}</small>
-            </div>
-            <div class='my-4'>
-              <b-form-input v-model="img"  id="img" type="url" placeholder="Picture url"></b-form-input>
-                <small class="text-danger position-absolute" v-if="error.img.length !== 0" >{{error.img}}</small>
-            </div>
-            <div class='my-4'>
-              <b-form-input v-model="stock"  id="stock" type="number" placeholder="Stock available"></b-form-input>
-              <small class="text-danger position-absolute" v-if="error.stock.length !== 0" >{{error.stock}}</small>
-            </div>
-            <div class='my-4'>
-              <b-form-input v-model="price"  id="price" type="number" placeholder="Price of the product"></b-form-input>
-              <small class="text-danger position-absolute" v-if="error.price.length !== 0" >{{error.price}}</small>
-            </div>
-             <div class='my-4'>
-             <select
-            v-model="category"
-            name="categorySelector"
-            class="form-select"
-            aria-label="Default select example"
-          >
-            <option selected></option>
-            <option v-for="cat in categories" :key="cat" :value="cat">
-              {{ cat }}
-            </option>
-          </select>
-           <small class="text-danger position-absolute" v-if="error.category.length !== 0" >{{error.category}}</small>
-            </div>
-            <div class="d-flex justify-content-end">
-                <b-button class="my-3 align-self-end" type="submit" variant="dark">Edit</b-button>
-            </div>
-          </b-form>
+                  <b-form-input v-model="id"  id="name" type="text" placeholder="Please complete with the id of the product you want to edit" ></b-form-input>
+                  <small class="text-danger position-absolute" v-if="error.id.length !== 0" >{{error.id}}</small>
+              </div>
+              <div class='my-4'>
+                  <b-form-input v-model="name"  id="name" type="text" placeholder="Complete product name"></b-form-input>
+                  <small class="text-danger position-absolute" v-if="error.name.length !== 0" >{{error.name}}</small>
+              </div>
+              <div class='my-4'>
+                <b-form-input v-model="ingredients"  id="ingredients" type="text" placeholder="Ingredients..."></b-form-input>
+                <small class="text-danger position-absolute" v-if="error.ingredients.length !== 0" >{{error.ingredients}}</small>
+              </div>
+              <div class='my-4'>
+                <b-form-input v-model="img"  id="img" type="url" placeholder="Picture url"></b-form-input>
+                  <small class="text-danger position-absolute" v-if="error.img.length !== 0" >{{error.img}}</small>
+              </div>
+              <div class='my-4'>
+                <b-form-input v-model="stock"  id="stock" type="number" placeholder="Stock available"></b-form-input>
+                <small class="text-danger position-absolute" v-if="error.stock.length !== 0" >{{error.stock}}</small>
+              </div>
+              <div class='my-4'>
+                <b-form-input v-model="price"  id="price" type="number" placeholder="Price of the product"></b-form-input>
+                <small class="text-danger position-absolute" v-if="error.price.length !== 0" >{{error.price}}</small>
+              </div>
+              <div class='my-4'>
+              <select
+              v-model="category"
+              name="categorySelector"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected></option>
+              <option v-for="cat in categories" :key="cat" :value="cat">
+                {{ cat }}
+              </option>
+            </select>
+            <small class="text-danger position-absolute" v-if="error.category.length !== 0" >{{error.category}}</small>
+              </div>
+              <div class="d-flex justify-content-end">
+                  <b-button class="my-3 align-self-end" type="submit" variant="dark">Edit</b-button>
+              </div>
+            </b-form>
           </div>
+      </div>
 </template>
 <script>
 import {mapActions} from 'vuex'
 export default {
     name:"AddProductComponent",
+    props: {
+    item: Object,
+    },
      data() {
       return {
-        stock:"",
-        img: "",
-        category: "",
-        name: "",
-        ingredients: "",
-        price: "",
-        id:'',
+        stock:this.item.stock,
+        img: this.item.img,
+        category: this.item.category,
+        name: this.item.name,
+        ingredients: this.item.ingredients,
+        price: this.item.price,
+        id:this.item.id,
         categories:[
             'woks',
             'rolls',
@@ -133,6 +138,15 @@ export default {
      },
 }
 </script>
-<style lang="">
-    
+<style scoped>
+    h5{
+    font-weight:600;
+    font-size:2rem;
+    letter-spacing:1px;
+    padding-top:.43rem;
+    align-self:flex-start;
+  }
+  .add{
+      padding:2rem;
+    }
 </style>

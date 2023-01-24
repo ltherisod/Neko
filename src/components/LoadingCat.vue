@@ -11,7 +11,7 @@ export default {
 <style scoped>
     .cat-container{
         width: 100%;
-        min-height: 90vh;
+        min-height: 83vh;
         display:flex;
         justify-content:center;
         align-items:center;

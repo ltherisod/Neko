@@ -20,29 +20,19 @@
           <li class="nav-item">
             <router-link class="nav-link active" to="/home">Home</router-link>
           </li>
+          <li class="nav-item" v-if="!isAdmin">
+            <router-link class="nav-link active" to="/about">About Us</router-link>
+          </li>
           <li class="nav-item" v-if="isAdmin">
             <router-link class="nav-link active" to="/config">Config</router-link>
           </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Menu
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Vegetarian</a></li>
-              <li><a class="dropdown-item" href="#">Sushi</a></li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Woks</a></li>
-            </ul>
+          <li class="nav-item" v-if="isAdmin">
+            <router-link class="nav-link active" to="/orders">Orders</router-link>
           </li>
+         
         </ul>
         <div class="d-flex justify-content-around align-items-center" style="width: 15%">
-          <li class="nav-item dropdown">
+          <div class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -56,10 +46,10 @@
               ></div>
             </a>
             <ul class="dropdown-menu">
-              <li><button class="dropdown-item" @click="logOut">Log out</button></li>
+              <li class="nav-item"><button class="dropdown-item" @click="logOut">Log out</button></li>
             </ul>
-          </li>
-          <CartWidget />
+          </div>
+          <div v-if="!isAdmin"><CartWidget /></div>
         </div>
       </div>
     </div>
@@ -81,6 +71,7 @@ export default {
   },
   created() {
     console.log(this.getUser);
+    
     if (this.getUser.admin === 'true') {
       this.isAdmin=true
     }
@@ -91,6 +82,9 @@ export default {
       this.logOutUser()
       this.$router.push("/");
     },
+    getQuantity(){
+      this.$store.dispatch("cartQuantity")
+    }
   },
   computed:{
       ...mapGetters('usersModule',['getUser']),

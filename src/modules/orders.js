@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '../router'
 export default{
     namespaced:true,
     state:{
@@ -40,6 +41,7 @@ export default{
                 commit('setOrders', result)
             }catch(error){
                 console.log(error)
+                router.push('/error')
             }finally{
                 commit('setLoading', false)
             }

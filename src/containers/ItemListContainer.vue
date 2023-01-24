@@ -19,6 +19,7 @@ export default {
     ItemList,
     LoadingCat
   },
+ 
   created() {
     this.getProducts()
   },
@@ -41,7 +42,7 @@ export default {
 }
 .catneo-container{
         width:100%;
-        min-height:80vh;
+        min-height:83vh;
         background-color:black;
     }
 </style>

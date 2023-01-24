@@ -1,40 +1,40 @@
 <template lang="">
-    <div>
-        <div v-if='loading' class="m-5 d-flex justify-content-center align-items-center w-100 customdiv">
+    <div class='orders-container'>
+        <div v-if='loading' class="d-flex justify-content-center align-items-center w-100 customdiv">
             <div class="custom spinner-grow" role="status" >
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only"></span>
             </div>
         </div>
         <div v-else> 
-        <h2>Our Orders 🥡</h2>
-         <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Buyer</th>
-                    <th scope="col">Order</th>
-                    <th scope="col">Delivered</th>
-                    <th scope="col">Change State</th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr v-for="prod in allOrders" :key="prod.id">
-                <td>{{prod.id}}</td>
-                <td>{{prod.date}}</td>
-                <td>{{prod.user}}</td>
-                <td>
-                    <ul>
-                        <li v-for='(order, i) in prod.cart' :key='i'>{{order.name}}</li>
-                    </ul>
-                </td>
-                <td v-if='prod.state'>✔️</td>
-                <td v-else>❌</td>
-                <td><button class="btn btn-dark" @click='changeState(prod)'>🗘</button></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+            <h2>Our Orders 🥡</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Buyer</th>
+                        <th scope="col">Order</th>
+                        <th scope="col">Delivered</th>
+                        <th scope="col">Change State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="prod in allOrders" :key="prod.id">
+                        <td>{{prod.id}}</td>
+                        <td>{{prod.date.slice(0,-14)}}</td>
+                        <td>{{prod.user}}</td>
+                        <td>
+                            <ul>
+                                <li v-for='(order, i) in prod.cart' :key='i'>{{order.name}}</li>
+                            </ul>
+                        </td>
+                        <td v-if='prod.state'>✔️</td>
+                        <td v-else>❌</td>
+                        <td><button class="btn btn-dark" @click='changeState(prod)'>🗘</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     
 </template>
@@ -61,9 +61,7 @@ export default {
                 showConfirmButton: false,
                 timer: 1000
                 })
-           
-        
-        }
+        },
       
       
     },
@@ -81,5 +79,14 @@ export default {
   }
   .customdiv{
     min-height: 50vh;
+  }
+  .orders-container{
+    padding:2rem;
+  }
+  h2{
+    font-weight:900;
+    font-size:2.5rem;
+    letter-spacing:1px;
+    padding-top:.43rem
   }
 </style>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '../router'
 export default{
     namespaced:true,
     state:{
@@ -29,14 +30,24 @@ export default{
     },
     actions:{
         getUsers: async function({commit}){
-            const res = await axios("https://639f2d1e5eb8889197f64888.mockapi.io/users");
-            const result=res.data
-            commit('setUsers',result)
+            try{
+              const res = await axios("https://639f2d1e5eb8889197f64888.mockapi.io/users");
+              const result=res.data
+              commit('setUsers',result)
+            }catch(error){
+              console.log(error)
+              router.push('/error')
+            }
           },
           postUsers : async function({commit},user){
-            const res = await  axios.post("https://639f2d1e5eb8889197f64888.mockapi.io/users",{...user})
-            commit('addUser',res.data)
-            commit('logUser', res.data) 
+            try{
+              const res = await  axios.post("https://639f2d1e5eb8889197f64888.mockapi.io/users",{...user})
+              commit('addUser',res.data)
+              commit('logUser', res.data) 
+            }catch(error){
+              console.log(error)
+              router.push('/error')
+            }
           }
     }
 }

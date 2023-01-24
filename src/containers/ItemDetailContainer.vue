@@ -39,13 +39,13 @@ export default {
 <style scoped>
 .item-container{
         width:100%;
-        min-height:80vh;
+        min-height:83vh;
         background-image:url("https://i.postimg.cc/zGj1YBy0/fonde-Detail.png");
         background-size:cover;
     }
     .catneo-container{
         width:100%;
-        min-height:80vh;
+        min-height:83vh;
         background-color:black;
     }
 </style>

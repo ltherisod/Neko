@@ -42,6 +42,7 @@ export default {
     shop() {
       let purchase = { ...this.item, quantity: this.number };
       this.$store.dispatch("addToCart", purchase);
+      this.$store.dispatch('quantity')
       this.$swal({
         position: "top-end",
         icon: "success",

@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     cart:[],
+    total:0,
   },
   getters: {
    
@@ -31,7 +32,12 @@ export default new Vuex.Store({
   },
   deleteCart(state) {
     state.cart = []           
-}  
+  },
+  cartQuantity(state){
+   let totalQuantity =  state.cart.reduce((acc, prod)=> acc + prod.quantity,0)
+   console.log(totalQuantity)
+   state.total = totalQuantity
+  }  
   },
   actions: {
     addToCart({commit},item){
@@ -42,6 +48,9 @@ export default new Vuex.Store({
     },
     clear({commit}){
       commit('deleteCart')
+    },
+    quantity({commit}){
+      commit('cartQuantity')
     }
   },
   modules: {

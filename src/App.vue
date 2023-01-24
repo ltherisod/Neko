@@ -16,7 +16,6 @@ export default {
 
 <style>
 #app {
- 
- 
+ font-family: 'Poppins', sans-serif;
 }
 </style>

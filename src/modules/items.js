@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '../router'
 export default{
     namespaced:true,
     state:{
@@ -36,10 +37,11 @@ export default{
             try{
                 commit('setIsLoading', true)
                 const res = await axios.get("https://639f2d1e5eb8889197f64888.mockapi.io/products");
-                const result=res.data
-                commit('setProducts',result)
+                    const result=res.data
+                    commit('setProducts',result)
             }catch(error){
                 console.log(error)
+                router.push("/error");
             }finally{
                 commit('setIsLoading', false)
             }
@@ -53,6 +55,7 @@ export default{
               const result = res.data
               commit('setNewProduct', result)
            }catch(error){
+            router.push("/error");
             console.log(error)
            }finally{
             commit('setIsLoading', false)
@@ -65,6 +68,7 @@ export default{
                 const result = res.data
                 commit('setProduct', result)
             }catch(error){
+                router.push("/error");
                 console.log(error)
             }finally{
                 commit('setIsLoading', false)
@@ -77,6 +81,7 @@ export default{
                 const result = res.data
                 commit('setProduct', result)
             }catch(error){
+                router.push("/error");
                 console.log(error)
             }finally{
                 commit('setIsLoading', false)
@@ -89,6 +94,7 @@ export default{
                 const result = res.data
                 commit('setProduct', result)
             }catch(error){
+                router.push("/error");
                 console.log(error)
             }finally{
                 commit('setIsLoading', false)
