@@ -5,13 +5,13 @@ Se pueden crear perfiles tanto como admistrador como regular y los mismos se dir
 El perfil admin puede modificar, agregar o borrar platos en el menú de comidas como tambien lleva un control de los pedidos realizados y modificar los estados de los mismos. Miertras que el perfil regular puede ver el listado de productos, ir al detalle de cada uno y agregarlos al carrito, modificar cantidades como lo prefiera y generar una orden de comida.
 
 
-![image](public/nekoapp.gif)
+![image](public/assets/neko.gif)
 
 ## Empezamos! 🚀
 
 ### Demo 💻
 
-Se puede ver el demo de la web en el siguiente link: [Neko](https://yummyarg.herokuapp.com/)
+Se puede ver el demo de la web en el siguiente link: [Neko](https://neko-ltherisod.vercel.app/register)
 
 ### Instalación 🔧
 

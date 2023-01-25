@@ -26,7 +26,7 @@ export default {
 </script>
 <style scoped>
 .home {
-  background-image: url("https://i.postimg.cc/gkw1vCrf/nikonikoni.png");
+  background-image: url("https://i.postimg.cc/QM6P6P0G/marcelacustom.png");
   background-size: cover;
   width: 100%;
   min-height: 86vh;

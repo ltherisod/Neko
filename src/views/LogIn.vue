@@ -46,7 +46,21 @@ export default {
       event.preventDefault();
       if (this.email.length && this.password.length) {
         const user = this.getUsersData.find((data) => data.email === this.email);
-        if (user.email === this.email && user.password === this.password) {
+        if(user === undefined){
+          console.log('error')
+          this.error = true;
+          this.$swal({
+            position: "top-end",
+            icon: "error",
+            title: `Invalid data`,
+            showConfirmButton: false,
+            timer: 1000,
+          });
+          setTimeout(() => {
+            this.error = false;
+          }, 3000);
+        }else{
+             if (user.email === this.email && user.password === this.password) {
          this.logUser(user)
           this.$swal({
             position: "top-end",
@@ -57,11 +71,21 @@ export default {
           });
           this.$router.push("/home");
         } else {
+          console.log('error')
           this.error = true;
+          this.$swal({
+            position: "top-end",
+            icon: "error",
+            title: `Invalid data`,
+            showConfirmButton: false,
+            timer: 1000,
+          });
           setTimeout(() => {
             this.error = false;
           }, 3000);
         }
+        }
+       
       } else {
         this.invalid = true;
         setTimeout(() => {

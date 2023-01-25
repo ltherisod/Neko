@@ -150,6 +150,11 @@ export default {
             this.error.name = "Please complete with your full name";
           }
         }
+        if (this.name.length < 6) {
+          {
+            this.error.name = "Your name is too short";
+          }
+        }
         if (!this.email) {
           {
             this.error.email = "Please complete a valid email";
