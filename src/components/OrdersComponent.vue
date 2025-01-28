@@ -53,7 +53,7 @@ export default {
                     state:true
               }
             const res = await this.updateState(product)
-            console.log(res)
+            await this.getOrders();
              this.$swal({
                 position: 'top-end',
                 icon: 'success',
